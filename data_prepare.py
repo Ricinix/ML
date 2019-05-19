@@ -95,6 +95,7 @@ if __name__ == '__main__':
 
     if pre_data_channel() and pre_weekday():
         print("部分离散特征值已线性连续化")
-    pre_for_level()
-    data_train.to_pickle(path + 'verification_level.pickle')
+    # pre_for_level()
+    pre_for_shares()
+    data_train.to_pickle(path + 'verification_shares.pickle')
 
