@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ddd0b55e-6671-4fb9-b7af-49458e879a65" name="Default Changelist" comment="new function:pre-operating for data">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-    </list>
+    <list default="true" id="ddd0b55e-6671-4fb9-b7af-49458e879a65" name="Default Changelist" comment="new function:pre-operating for data" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +37,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/linear_regression.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="307">
+            <state relative-caret-position="-245">
               <caret line="31" column="37" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -128,7 +126,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="85" />
     <option name="y" value="25" />
     <option name="width" value="1750" />
@@ -332,7 +330,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.14134742" />
@@ -450,7 +448,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/linear_regression.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
+        <state relative-caret-position="-245">
           <caret line="31" column="37" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
