@@ -3,7 +3,7 @@ import pandas as pd
 
 
 path = "E:\\Programming\\python_pickle\\"
-name = 'train_level.pickle'
+name = 'train_shares.pickle'
 
 
 # min-max标准化(线性标准化)
@@ -35,7 +35,7 @@ def sum_of_square_error(X, y, theta):
 
 def run_linear_regression(X, y):
     iterations = 100000
-    alpha = 0.001
+    alpha = 0.02
 
     theta = np.zeros(X.shape[1])
 

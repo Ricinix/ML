@@ -53,7 +53,7 @@ def get_weights_time_test(X, x_test):
     get_weights_iteration(X, x_test)
     end = time.time()
     iterations_time = end - start
-    print("无迭代方法所耗时间：%d\n迭代方法所耗时间：%d" % (no_iterations_time, iterations_time))
+    print("无迭代方法所耗时间：%.5f\n迭代方法所耗时间：%.5f" % (no_iterations_time, iterations_time))
 
 
 def run_steep_gradient_descent(X, y, alpha, theta, weights):
@@ -98,7 +98,7 @@ def R_squared(result, y_t):
 
 
 if __name__ == '__main__':
-    data_train = load_data('train_level.pickle')
+    data_train = load_data('train_shares.pickle')
     np_data = np.array(data_train)
     m = data_train.shape[0]  # 样本数量
     n = data_train.shape[1] - 1  # 特征值数量

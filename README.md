@@ -4,3 +4,5 @@
 ---
 
 ## Linear Regression
+
+​	详细内容见doc文件夹
