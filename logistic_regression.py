@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-path = "E:\\Programming\\python_pickle\\"
+path = ".\\data\\"
 name = 'train_level.pickle'
 
 

@@ -4,7 +4,7 @@ import time
 
 
 def load_data(name):
-    path = "E:\\Programming\\python_pickle\\"
+    path = ".\\data\\"
     data_train = pd.read_pickle(path + name)
     return data_train
 

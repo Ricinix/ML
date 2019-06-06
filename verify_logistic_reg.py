@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 
-path = "E:\\Programming\\python_pickle\\"
+path = ".\\data\\"
 data_name = 'verification_level.pickle'
 module_name = 'logistic_reg_moudle.pickle'
 data_train = pd.read_pickle(path + data_name)
