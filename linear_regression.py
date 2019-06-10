@@ -19,7 +19,7 @@ def sum_of_square_error(X, y, theta):
 
 def run_linear_regression(X, y):
     iterations = 100000
-    alpha = 0.02
+    alpha = 0.2
 
     theta = np.zeros(X.shape[1])
 

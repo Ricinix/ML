@@ -5,7 +5,7 @@ from util import DataPreHandle
 
 
 data_train = pd.read_pickle(os.path.join('.', 'data', 'verification_shares.pickle'))
-theta = pd.read_pickle(os.path.join('.', 'module', 'linear_reg_moudle.pickle'))
+theta = pd.read_pickle(os.path.join('.', 'module', 'linear_reg_module.pickle'))
 
 
 def mse(X, y):
