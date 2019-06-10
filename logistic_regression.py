@@ -1,23 +1,11 @@
+import os
 import numpy as np
 import pandas as pd
+from util import DataPreHandle
 
 
-path = ".\\data\\"
+path = os.path.join('.', 'data')
 name = 'train_level.pickle'
-
-
-# min-max标准化(线性标准化)
-def min_max_normalization(X):
-    for m in range(X.shape[0]):
-        X[m] = (X[m] - np.max(X[m])) / (np.max(X[m]) - np.min(X[m]))
-    return X
-
-
-# z-score 标准化(正态分布标准化)
-def zero_mean_normalization(X):
-    for m in range(X.shape[0]):
-        X[m] = (X[m] - X[m].mean()) / X[m].std()
-    return X
 
 
 # sigmoid函数
@@ -65,17 +53,17 @@ def logistic_reg(
 if __name__ == "__main__":
 
     # 加载数据
-    data_train = pd.read_pickle(path + name)
+    data_train = pd.read_pickle(os.path.join(path, name))
     np_data = np.array(data_train)
     m = data_train.shape[0]  # 样本数量
     n = data_train.shape[1] - 1  # 特征值数量
     X = np_data[:, 0:n]
     y = np_data[:, n]
     # 数据归一化
-    X = zero_mean_normalization(X)
+    X = DataPreHandle.zero_mean_normalization(X)
 
     alpha = 0.1
     theta = logistic_reg(alpha, X, y, max_iterations=100000)
     print(theta)
     df = pd.DataFrame(theta)
-    df.to_pickle(path + "logistic_reg_moudle.pickle")
+    df.to_pickle(os.path.join('.', 'module', "logistic_reg_module.pickle"))

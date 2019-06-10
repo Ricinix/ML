@@ -1,24 +1,13 @@
+import os
 import numpy as np
 import pandas as pd
+from util import DataPreHandle
 
 
-path = ".\\data\\"
 data_name = 'verification_level.pickle'
-module_name = 'logistic_reg_moudle.pickle'
-data_train = pd.read_pickle(path + data_name)
-theta = pd.read_pickle(path + module_name)
-
-
-def min_max_normalization(X):
-    for m in range(X.shape[0]):
-        X[m] = (X[m] - np.max(X[m])) / (np.max(X[m]) - np.min(X[m]))
-    return X
-
-
-def zero_mean_normalization(X):
-    for m in range(X.shape[0]):
-        X[m] = (X[m] - X[m].mean()) / X[m].std()
-    return X
+module_name = 'logistic_reg_module.pickle'
+data_train = pd.read_pickle(os.path.join('.', 'data', data_name))
+theta = pd.read_pickle(os.path.join('.', 'module', module_name))
 
 
 def sigmoid_function(z):
@@ -33,7 +22,7 @@ if __name__ == '__main__':
     y = X[:, n]
     X = X[:, :n]
     # 数据归一化
-    X = zero_mean_normalization(X)
+    X = DataPreHandle.zero_mean_normalization(X)
 
     z = np.dot(X, theta)
     h = sigmoid_function(z)

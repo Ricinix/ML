@@ -1,26 +1,12 @@
+import os
+import time
 import numpy as np
 import pandas as pd
-import time
+from util import DataPreHandle
 
 
 def load_data(name):
-    path = ".\\data\\"
-    data_train = pd.read_pickle(path + name)
-    return data_train
-
-
-# min-max标准化(线性标准化)
-def min_max_normalization(X):
-    for m in range(X.shape[0]):
-        X[m] = (X[m] - np.max(X[m])) / (np.max(X[m]) - np.min(X[m]))
-    return X
-
-
-# z-score 标准化(正态分布标准化)
-def zero_mean_normalization(X):
-    for m in range(X.shape[0]):
-        X[m] = (X[m] - X[m].mean()) / X[m].std()
-    return X
+    return pd.read_pickle(os.path.join('.', 'data', name))
 
 
 def get_weights(X, x_test, k=1.0):
@@ -104,14 +90,14 @@ if __name__ == '__main__':
     n = data_train.shape[1] - 1  # 特征值数量
     X = np_data[:, 0:n]
     y = np_data[:, n]
-    X = min_max_normalization(X)
+    X = DataPreHandle.min_max_normalization(X)
 
     data_verify = load_data('verification_shares.pickle')
     np_data_verify = np.array(data_verify)
     m_t = data_verify.shape[0]
     X_t = np_data_verify[:, 0:n]
     y_t = np_data_verify[:, n]
-    X_t = min_max_normalization(X_t)
+    X_t = DataPreHandle.min_max_normalization(X_t)
 
     # get_weights_time_test(X, X_t[0])
     result = np.zeros(m_t)

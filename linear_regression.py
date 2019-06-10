@@ -1,23 +1,7 @@
+import os
 import numpy as np
 import pandas as pd
-
-
-path = ".\\data\\"
-name = 'train_shares.pickle'
-
-
-# min-max标准化(线性标准化)
-def min_max_normalization(X):
-    for m in range(X.shape[0]):
-        X[m] = (X[m] - np.max(X[m])) / (np.max(X[m]) - np.min(X[m]))
-    return X
-
-
-# z-score 标准化(正态分布标准化)
-def zero_mean_normalization(X):
-    for m in range(X.shape[0]):
-        X[m] = (X[m] - X[m].mean()) / X[m].std()
-    return X
+from util import DataPreHandle
 
 
 def run_steep_gradient_descent(X, y, alpha, theta):
@@ -48,15 +32,15 @@ def run_linear_regression(X, y):
 
 
 if __name__ == '__main__':
-    data_train = pd.read_pickle(path + name)
+    data_train = pd.read_pickle(os.path.join('.', 'data', 'train_shares.pickle'))
     np_data = np.array(data_train)
     m = data_train.shape[0]  # 样本数量
     n = data_train.shape[1] - 1  # 特征值数量
     X = np_data[:, 0:n]
     y = np_data[:, n]
-    X = min_max_normalization(X)
+    X = DataPreHandle.min_max_normalization(X)
 
     theta = run_linear_regression(X, y)
     print(theta)
     df = pd.DataFrame(theta)
-    df.to_pickle(path + 'linear_reg_moudle.pickle')
+    df.to_pickle(os.path.join('.', 'module', 'linear_reg_module.pickle'))

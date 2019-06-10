@@ -1,9 +1,8 @@
-import numpy as np
+import os
 import pandas as pd
 
-path = ".\\data\\"
-name = 'verification_data.csv'
-data_train = pd.read_csv(path + name)
+
+data_train = pd.read_csv(os.path.join('.', 'data', 'verification_data.csv'))
 print(data_train.columns.values)
 
 
@@ -97,5 +96,5 @@ if __name__ == '__main__':
         print("部分离散特征值已线性连续化")
     # pre_for_level()
     pre_for_shares()
-    data_train.to_pickle(path + 'verification_shares.pickle')
+    data_train.to_pickle(os.path.join('.', 'data', 'verification_shares.pickle'))
 

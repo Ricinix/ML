@@ -1,25 +1,11 @@
+import os
 import pandas as pd
 import numpy as np
+from util import DataPreHandle
 
 
-path = ".\\data\\"
-data_name = 'verification_shares.pickle'
-module_name = 'linear_reg_moudle.pickle'
-data_train = pd.read_pickle(path + data_name)
-theta = pd.read_pickle(path + module_name)
-
-
-# min-max标准化(线性标准化)
-def min_max_normalization(X):
-    for m in range(X.shape[0]):
-        X[m] = (X[m] - np.max(X[m])) / (np.max(X[m]) - np.min(X[m]))
-    return X
-
-
-def zero_mean_normalization(X):
-    for m in range(X.shape[0]):
-        X[m] = (X[m] - X[m].mean()) / X[m].std()
-    return X
+data_train = pd.read_pickle(os.path.join('.', 'data', 'verification_shares.pickle'))
+theta = pd.read_pickle(os.path.join('.', 'module', 'linear_reg_moudle.pickle'))
 
 
 def mse(X, y):
@@ -46,7 +32,7 @@ if __name__ == '__main__':
     y = X[:, n]
     X = X[:, :n]
     # 数据归一化
-    X = min_max_normalization(X)
+    X = DataPreHandle.min_max_normalization(X)
 
     r_square = R_squared(X, y)
     print('R-squared:', r_square)
