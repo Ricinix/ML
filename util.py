@@ -4,6 +4,7 @@ import pandas as pd
 
 class DataPreHandle:
 
+    # min-max标准化(线性标准化)
     @staticmethod
     def min_max_normalization(X):
         for n in range(X.shape[1]):

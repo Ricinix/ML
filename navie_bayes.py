@@ -4,7 +4,7 @@ import numpy as np
 from util import DataPreHandle
 
 
-def fit(data, x_set=[]):
+def fit(data):
     output_name = data.columns[-1]
     features = data.columns[0: -1]
     counts = {}
@@ -18,9 +18,9 @@ def fit(data, x_set=[]):
             possible_values = set(small_data[f])
             for value in possible_values:
                 counts[output][f][value] = len(small_data[small_data[f] == value])
-            for x in x_set:
-                if x not in possible_values:
-                    counts[output][f][x] = 0
+            # for x in x_set:
+            #     if x not in possible_values:
+            #         counts[output][f][x] = 0
     return counts
 
 
@@ -58,7 +58,10 @@ def bayes(counts, data_verify):
                 for x in counts[y][column].keys():
                     sum += counts[y][column][x]
 
-                px_given_y *= (counts[y][column][data_verify[column][m]] + 1) / (sum + len(counts[y][column].keys()))
+                if data_verify[column][m] not in counts[y][column].keys():
+                    px_given_y *= 1 / (sum + len(counts[y][column].keys()))
+                else:
+                    px_given_y *= (counts[y][column][data_verify[column][m]] + 1) / (sum + len(counts[y][column].keys()))
 
             y_piece[y] = px_given_y * py[y]
 
@@ -94,7 +97,7 @@ def main():
     data_verify = pd.read_pickle(os.path.join('.', 'data', 'verification_level.pickle'))
     data_verify = DataPreHandle.discrete_normalization(data_verify, 'data_channel', 'weekday')
     # print(data_verify)
-    counts = fit(data_train, x_set=[x for x in range(10)])
+    counts = fit(data_train)
     # display_counts(counts)
     y_predict = bayes(counts, data_verify)
     print(y_predict)
