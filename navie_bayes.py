@@ -58,10 +58,10 @@ def bayes(counts, data_verify):
                 for x in counts[y][column].keys():
                     sum += counts[y][column][x]
 
-                if data_verify[column][m] not in counts[y][column].keys():
-                    px_given_y *= 1 / (sum + len(counts[y][column].keys()))
-                else:
+                try:
                     px_given_y *= (counts[y][column][data_verify[column][m]] + 1) / (sum + len(counts[y][column].keys()))
+                except KeyError:
+                    px_given_y *= 1 / (sum + len(counts[y][column].keys()))
 
             y_piece[y] = px_given_y * py[y]
 
