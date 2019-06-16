@@ -5,4 +5,5 @@
 
 ## Linear Regression
 
-​	详细内容见doc文件夹
+​	详细内容见[博客](<https://ricinix.github.io/pages/linear_regression.html>)
+
