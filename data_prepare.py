@@ -1,8 +1,10 @@
 import os
 import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
 
 
-data_train = pd.read_csv(os.path.join('.', 'data', 'verification_data.csv'))
+data_train = pd.read_pickle(os.path.join('data', 'train_shares.pickle'))
 print(data_train.columns.values)
 
 
@@ -91,10 +93,6 @@ def pre_for_level():
 
 
 if __name__ == '__main__':
+    pass
 
-    if pre_data_channel() and pre_weekday():
-        print("部分离散特征值已线性连续化")
-    # pre_for_level()
-    pre_for_shares()
-    data_train.to_pickle(os.path.join('.', 'data', 'verification_shares.pickle'))
 

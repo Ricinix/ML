@@ -4,7 +4,7 @@ import pandas as pd
 from util import DataPreHandle
 
 
-path = os.path.join('.', 'data')
+path = os.path.join('data')
 name = 'train_level.pickle'
 
 
@@ -61,7 +61,6 @@ if __name__ == "__main__":
     y = np_data[:, n]
     # 数据归一化
     X = DataPreHandle.zero_mean_normalization(X)
-
     alpha = 0.1
     theta = logistic_reg(alpha, X, y, max_iterations=100000)
     print(theta)
