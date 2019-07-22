@@ -1,11 +1,7 @@
-import os
-import numpy as np
-import pandas as pd
-from util import DataPreHandle
-
-
-path = os.path.join('data')
-name = 'train_level.pickle'
+from pathlib import Path
+import pickle
+import seaborn as sns
+from util import *
 
 
 # sigmoid函数
@@ -53,16 +49,20 @@ def logistic_reg(
 if __name__ == "__main__":
 
     # 加载数据
-    data_train = pd.read_pickle(os.path.join(path, name))
+    data_train = sns.load_dataset('iris')
+    # 随机选组 m / k 个最为测试集
+    dr_l = FeaturePreHandle.rand_list(data_train.shape[0], int(data_train.shape[0] / 5))
+    data_train.drop(index=dr_l)
+    # 将字符串转换为数字
+    data_train = DataPreHandle.str2num(data_train)
     np_data = np.array(data_train)
-    m = data_train.shape[0]  # 样本数量
-    n = data_train.shape[1] - 1  # 特征值数量
-    X = np_data[:, 0:n]
-    y = np_data[:, n]
+    X = np_data[:, :-1].astype(float)
+    y = (np_data[:, -1] != 0) * 1
     # 数据归一化
     X = DataPreHandle.zero_mean_normalization(X)
-    alpha = 0.1
+    alpha = 0.01
     theta = logistic_reg(alpha, X, y, max_iterations=100000)
-    print(theta)
-    df = pd.DataFrame(theta)
-    df.to_pickle(os.path.join('.', 'module', "logistic_reg_module.pickle"))
+    module = ModuleData(theta=theta, drop_list=dr_l)
+    module = pickle.dumps(module)
+    with open(Path('module/logistic_reg_module.pickle'), "wb") as f:
+        f.write(module)

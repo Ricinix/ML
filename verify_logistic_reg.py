@@ -1,13 +1,7 @@
-import os
-import numpy as np
-import pandas as pd
-from util import DataPreHandle
-
-
-data_name = 'verification_level.pickle'
-module_name = 'logistic_reg_module.pickle'
-data_train = pd.read_pickle(os.path.join('.', 'data', data_name))
-theta = pd.read_pickle(os.path.join('.', 'module', module_name))
+from pathlib import Path
+import pickle
+import seaborn as sns
+from util import *
 
 
 def sigmoid_function(z):
@@ -15,12 +9,19 @@ def sigmoid_function(z):
 
 
 if __name__ == '__main__':
+    data_train = sns.load_dataset("iris")
+    with open(Path('module/logistic_reg_module.pickle'), "rb") as f:
+        module = pickle.load(f)
+    keep_list = module.data['drop_list']
+    drop_list = FeaturePreHandle.pick_complementary_list(data_train.shape[0], keep_list)
+    data_train.drop(index=drop_list, inplace=True)
+    print("样本总数为: %d" % data_train.shape[0])
+    theta = module.data['theta']
+    data_train = DataPreHandle.str2num(data_train)
     # 加载数据
-    m = data_train.shape[0]  # 样本数量
-    n = data_train.shape[1] - 1  # 特征值数量
     X = np.array(data_train)
-    y = X[:, n]
-    X = X[:, :n]
+    y = (X[:, -1] != 0) * 1
+    X = X[:, :-1].astype(float)
     # 数据归一化
     X = DataPreHandle.zero_mean_normalization(X)
 

@@ -1,7 +1,5 @@
 import os
-import numpy as np
-import pandas as pd
-from util import DataPreHandle
+from util import *
 
 
 def run_steep_gradient_descent(X, y, alpha, theta):

@@ -1,7 +1,6 @@
 import os
-import pandas as pd
-import numpy as np
-from util import DataPreHandle
+import seaborn as sns
+from util import *
 
 
 def fit(data):
@@ -91,17 +90,18 @@ def verify(result, y):
 
 
 def main():
-    data_train = pd.read_pickle(os.path.join('.', 'data', 'train_level.pickle'))
-    data_train = DataPreHandle.discrete_normalization(data_train, 'data_channel', 'weekday')
-    # print(data_train)
-    data_verify = pd.read_pickle(os.path.join('.', 'data', 'verification_level.pickle'))
-    data_verify = DataPreHandle.discrete_normalization(data_verify, 'data_channel', 'weekday')
+    data_train = sns.load_dataset("iris")
+    data_train[data_train.columns.values[-1]] = (data_train[data_train.columns.values[-1]] != 1) * 1
+    data_train = DataPreHandle.discrete_normalization(data_train, 4, data_train.columns.values[-1])
+    verify_list = FeaturePreHandle.rand_list(data_train.shape[0], int(data_train.shape[0] / 5))
+    drop_list = FeaturePreHandle.pick_complementary_list(data_train.shape[0], verify_list)
+    data_verify = data_train.drop(index=drop_list)
+    data_train.drop(index=verify_list, inplace=True)
     # print(data_verify)
     counts = fit(data_train)
     # display_counts(counts)
     y_predict = bayes(counts, data_verify)
-    print(y_predict)
-    verify(np.array(y_predict), np.array(data_verify['target_level']))
+    verify(np.array(y_predict), np.array(data_verify[data_verify.columns.values[-1]]))
 
 
 if __name__ == '__main__':
